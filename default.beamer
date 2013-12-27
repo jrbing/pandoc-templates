@@ -5,6 +5,9 @@ $endif$
 $if(colortheme)$
 \usecolortheme{$colortheme$}
 $endif$
+$if(fonttheme)$
+\usefonttheme{$fonttheme$}
+$endif$
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
@@ -42,7 +45,7 @@ $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
 $if(tables)$
-\usepackage{longtable}
+\usepackage{longtable,booktabs}
 % These lines are needed to make table captions work with longtable:
 \makeatletter
 \def\fnum@table{\tablename~\thetable}
@@ -67,7 +70,10 @@ $if(graphics)$
 }
 \makeatother
 \let\Oldincludegraphics\includegraphics
-\renewcommand{\includegraphics}[2][]{\Oldincludegraphics[width=\ScaleIfNeeded]{#2}}
+{%
+ \catcode`\@=11\relax%
+ \gdef\includegraphics{\@ifnextchar[{\Oldincludegraphics}{\Oldincludegraphics[width=\ScaleIfNeeded]}}%
+}%
 $endif$
 
 % Comment these out if you don't want a slide with just the
@@ -149,12 +155,16 @@ $else$
 \renewcommand\refname{$biblio-title$}
 $endif$
 $endif$
+\begin{frame}[allowframebreaks]{$biblio-title$}
 \bibliography{$biblio-files$}
+\end{frame}
 
 $endif$
 $endif$
 $if(biblatex)$
-\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+\begin{frame}[allowframebreaks]{$biblio-title$}
+\printbibliography[heading=none]
+\end{frame}
 
 $endif$
 $for(include-after)$

@@ -61,7 +61,7 @@ $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
 $if(tables)$
-\usepackage{longtable}
+\usepackage{longtable,booktabs}
 $endif$
 $if(graphics)$
 \usepackage{graphicx}
@@ -129,9 +129,6 @@ $if(lang)$
   \usepackage[$lang$]{babel}
 \fi
 $endif$
-$for(header-includes)$
-$header-includes$
-$endfor$
 
 $if(title)$
 \title{$title$}
@@ -141,10 +138,18 @@ $if(subtitle)$
 $endif$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
+$for(header-includes)$
+$header-includes$
+$endfor$
 
 \begin{document}
 $if(title)$
 \maketitle
+$endif$
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
 $endif$
 
 $for(include-before)$
