@@ -116,10 +116,13 @@ $if(natbib)$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
-$for(bibliography)$
-\addbibresource{$bibliography$}
-$endfor$
+\usepackage{biblatex}
+$if(biblio-files)$
+\bibliography{$biblio-files$}
+$endif$
+$if(bibliography)$
+\bibliography{$bibliography$}
+$endif$
 $endif$
 $if(listings)$
 \usepackage{listings}
@@ -259,7 +262,6 @@ $endif$
 $body$
 
 $if(natbib)$
-$if(bibliography)$
 $if(biblio-title)$
 $if(book-class)$
 \renewcommand\bibname{$biblio-title$}
@@ -267,8 +269,11 @@ $else$
 \renewcommand\refname{$biblio-title$}
 $endif$
 $endif$
-\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-
+$if(biblio-files)$
+\bibliography{$biblio-files$}
+$endif$
+$if(bibliography)$
+\bibliography($bibliography$}
 $endif$
 $endif$
 $if(biblatex)$
