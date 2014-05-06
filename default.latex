@@ -224,11 +224,12 @@ $endif$
 $if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 $endif$
-$if(institute)$
-\providecommand{\institute}[1]{}
-\institute{$for(institute)$$institute$$sep$ \and $endfor$}
-$endif$
+$if(date)$
 \date{$date$}
+$endif$
+$for(header-includes)$
+$header-includes$
+$endfor$
 
 \begin{document}
 $if(title)$
