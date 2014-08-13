@@ -21,33 +21,21 @@ $endfor$
 </head>
 <body$if(coverpage)$ id="cover"$endif$>
 $if(titlepage)$
-<section epub:type="titlepage">
-$for(title)$
-$if(title.type)$
-  <h1 class="$title.type$">$title.text$</h1>
-$else$
-  <h1 class="title">$title$</h1>
-$endif$
-$endfor$
+  <section epub:type="titlepage">
+    <h1 class="title">$title$</h1>
 $if(subtitle)$
-  <p class="subtitle">$subtitle$</p>
+    <h1 class="subtitle">$subtitle$</h1>
 $endif$
 $for(author)$
-  <p class="author">$author$</p>
-$endfor$
-$for(creator)$
-  <p class="$creator.role$">$creator.text$</p>
+    <h2 class="author">$author$</h2>
 $endfor$
 $if(publisher)$
   <p class="publisher">$publisher$</p>
 $endif$
 $if(date)$
-  <p class="date">$date$</p>
+    <h3 class="date">$date$</h3>
 $endif$
-$if(rights)$
-  <div class="rights">$rights$</div>
-$endif$
-</section>
+  </section>
 $else$
 $for(include-before)$
 $include-before$
