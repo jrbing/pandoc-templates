@@ -36,6 +36,9 @@ $endfor$
 $for(creator)$
   <p class="$creator.role$">$creator.text$</p>
 $endfor$
+$for(creator)$
+  <h2 class="$creator.type$">$creator.text$</h2>
+$endfor$
 $if(publisher)$
   <p class="publisher">$publisher$</p>
 $endif$
@@ -43,7 +46,7 @@ $if(date)$
   <p class="date">$date$</p>
 $endif$
 $if(rights)$
-  <div class="rights">$rights$</div>
+  <p class="rights">$rights$</p>
 $endif$
 $else$
 $for(include-before)$
