@@ -101,6 +101,10 @@ $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+\VerbatimFootnotes
+$endif$
 $if(tables)$
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
