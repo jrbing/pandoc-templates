@@ -19,7 +19,7 @@ $for(css)$
   <link rel="stylesheet" type="text/css" href="$css$" />
 $endfor$
 </head>
-<body>
+<body$if(coverpage)$ id="cover"$endif$>
 $if(titlepage)$
 <section epub:type="titlepage">
 $for(title)$
@@ -45,7 +45,7 @@ $if(date)$
   <p class="date">$date$</p>
 $endif$
 $if(rights)$
-  <p class="rights">$rights$</p>
+  <div class="rights">$rights$</div>
 $endif$
 </section>
 $else$
