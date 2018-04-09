@@ -17,10 +17,15 @@ $endif$
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="$revealjs-url$/css/reveal.css">
-  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
 $if(quotes)$
-  <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
+      q { quotes: "“" "”" "‘" "’"; }
 $endif$
+  </style>
 $if(highlighting-css)$
   <style type="text/css">
 $highlighting-css$
@@ -31,19 +36,20 @@ $if(theme)$
 $else$
   <link rel="stylesheet" href="$revealjs-url$/css/theme/black.css" id="theme">
 $endif$
-    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
-    <script>
-      if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = '$revealjs-url$/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-      }
-    </script>
-    <!--[if lt IE 9]>
-    <script src="$revealjs-url$/lib/js/html5shiv.js"></script>
-    <![endif]-->
+$for(css)$
+  <link rel="stylesheet" href="$css$"/>
+$endfor$
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '$revealjs-url$/css/print/pdf.css' : '$revealjs-url$/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="$revealjs-url$/lib/js/html5shiv.js"></script>
+  <![endif]-->
 $if(math)$
   $math$
 $endif$
@@ -59,7 +65,7 @@ $endfor$
     <div class="slides">
 
 $if(title)$
-<section>
+<section id="$idprefix$title-slide">
   <h1 class="title">$title$</h1>
 $if(subtitle)$
   <p class="subtitle">$subtitle$</p>
@@ -74,14 +80,13 @@ $endif$
 $endif$
 $if(toc)$
 <section id="$idprefix$TOC">
-$toc$
+$table-of-contents$
 </section>
 $endif$
 
 $body$
     </div>
   </div>
-
 
   <script src="$revealjs-url$/lib/js/head.min.js"></script>
   <script src="$revealjs-url$/js/reveal.js"></script>
@@ -225,15 +230,36 @@ $endif$
 $if(maxScale)$
         maxScale: $maxScale$,
 $endif$
+$if(mathjax)$
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+$endif$
 
         // Optional reveal.js plugins
         dependencies: [
           { src: '$revealjs-url$/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: '$revealjs-url$/plugin/zoom-js/zoom.js', async: true },
-    $if(notes-server)$
+$if(notes-server)$
           { src: '$revealjs-url$/socket.io/socker.io.js', async: true },
           { src: '$revealjs-url$/plugin/notes-server/client.js', async: true },
-    $endif$
+$endif$
+$if(mathjax)$
+          { src: '$revealjs-url$/plugin/math/math.js', async: true },
+$endif$
           { src: '$revealjs-url$/plugin/notes/notes.js', async: true }
         ]
       });
